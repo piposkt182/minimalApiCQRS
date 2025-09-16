@@ -23,5 +23,3 @@ app.UseHttpsRedirection();
 app.RegisterEndpointDefinitions();
 
 app.Run();
-
-
