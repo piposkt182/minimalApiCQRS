@@ -11,7 +11,7 @@ app.Use(async (ctx, next) =>
     {
         await next();
     }
-    catch (Exception)
+    catch (Exception ex)
     {
         ctx.Response.StatusCode = 500;
         await ctx.Response.WriteAsync("An error acurred");
@@ -21,5 +21,6 @@ app.Use(async (ctx, next) =>
 app.UseHttpsRedirection();
 
 app.RegisterEndpointDefinitions();
+app.RegisterUserEndpointDefinitions();
 
 app.Run();
