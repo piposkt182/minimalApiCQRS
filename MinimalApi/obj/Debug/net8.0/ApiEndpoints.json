@@ -134,8 +134,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "user",
-        "Type": "Domain.Models.User",
+        "Name": "dto",
+        "Type": "MinimalApi.Dto.CreateUserDto",
         "IsRequired": true
       }
     ],

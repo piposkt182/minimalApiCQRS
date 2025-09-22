@@ -1,5 +1,4 @@
-﻿
-using Domain.Models;
+﻿using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
@@ -54,9 +53,21 @@ namespace DataAccess
 
                 entity.Property(e => e.GenderId)
                       .IsRequired();
+            });
 
-                entity.Property(e => e.CountryId)
-                      .IsRequired();
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasOne(u => u.Address)
+                      .WithOne() // 👈 ya no especificamos la navegación inversa
+                      .HasForeignKey<Address>(a => a.Id);
+            });
+
+            modelBuilder.Entity<Address>(entity =>
+            {
+                entity.ToTable("Addresses");
+                entity.HasKey(a => a.Id);
+                entity.Property(a => a.Id).ValueGeneratedOnAdd(); // 
+                entity.HasOne(a => a.User).WithOne(u => u.Address).HasForeignKey<Address>(a => a.UserId);
             });
         }
     }
