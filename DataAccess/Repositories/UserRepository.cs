@@ -29,12 +29,12 @@ namespace DataAccess.Repositories
 
         public async Task<ICollection<User>> GetAllUsers()
         {
-            return await _ctx.Users.ToListAsync();
+            return await _ctx.Users.Include(u => u.Address).ToListAsync();
         }
 
         public async Task<User> GetUserById(int id)
         {
-            return await _ctx.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return await _ctx.Users.Include(u => u.Address).FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<User> UpdateUser(User user)

@@ -3,6 +3,7 @@ using Application.Users.Queries;
 using Domain.Models;
 using MediatR;
 using MinimalApi.Abstractions;
+using MinimalApi.Dto;
 
 namespace MinimalApi.EndpointDefinitions
 {
@@ -38,9 +39,19 @@ namespace MinimalApi.EndpointDefinitions
             return TypedResults.Ok(user); 
         }
 
-        private async Task<IResult> CreateUser(IMediator mediator, User user)
+        private async Task<IResult> CreateUser(IMediator mediator, CreateUserDto dto)
         {
-            var command = new CreateUserCommand { User = user };
+            var command = new CreateUserCommand {
+                Dni = dto.Dni,
+                Name = dto.Name,
+                LastName = dto.LastName,
+                DateOfBirth = dto.DateOfBirth,
+                Email = dto.Email,
+                GenderId = dto.GenderId,
+                CountryId = dto.Address.CountryId,
+                Street = dto.Address.Street,
+                ZipCode = dto.Address.ZipCode
+            };
             var userCreated = await mediator.Send(command);
             return TypedResults.Ok(userCreated);
         }

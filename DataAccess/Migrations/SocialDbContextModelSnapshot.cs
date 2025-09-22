@@ -78,9 +78,6 @@ namespace DataAccess.Migrations
 
                 entity.Property(e => e.GenderId)
                       .IsRequired();
-
-                entity.Property(e => e.CountryId)
-                      .IsRequired();
             });
         }
     }

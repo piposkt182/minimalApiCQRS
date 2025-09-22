@@ -3,6 +3,12 @@ using MinimalApi.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 builder.RegisterServices();
 
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+});
+
+
 var app = builder.Build();
 
 app.Use(async (ctx, next) =>

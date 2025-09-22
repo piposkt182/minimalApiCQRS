@@ -16,7 +16,20 @@ namespace Application.Users.CommandHandler
 
         public async Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            return await _userRepository.CreateUser(request.User);
+            var user = new User
+            {
+                Dni = request.Dni,
+                Name = request.Name,
+                lastName = request.LastName,
+                DateOfBirth = request.DateOfBirth,
+                Email = request.Email,
+                GenderId = request.GenderId,
+                Address = new Address {
+                   Street= request.Street, 
+                   ZipCode =  request.ZipCode,
+                   CountryId =  request.CountryId}
+            };
+            return await _userRepository.CreateUser(user);
         }
     }
 }
