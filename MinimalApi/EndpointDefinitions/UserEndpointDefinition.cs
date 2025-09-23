@@ -4,6 +4,7 @@ using Domain.Models;
 using MediatR;
 using MinimalApi.Abstractions;
 using MinimalApi.Dto;
+using MinimalApi.Filters;
 
 namespace MinimalApi.EndpointDefinitions
 {
@@ -18,7 +19,7 @@ namespace MinimalApi.EndpointDefinitions
 
             users.MapGet("/{id}", GetUserById);
 
-            users.MapPost("/", CreateUser);
+            users.MapPost("/", CreateUser).AddEndpointFilter<UserValidationFilter>();
 
             users.MapPut("/", UpdateUser);
 
