@@ -2,6 +2,7 @@
 bin/
 obj/
 out/
+obj/Debug/net8.0/
 
 # Visual Studio
 .vs/
